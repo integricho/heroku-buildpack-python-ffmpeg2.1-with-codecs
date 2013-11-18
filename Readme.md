@@ -1,7 +1,7 @@
-Heroku buildpack: Python-ffmpeg
+Heroku buildpack: Python-ffmpeg 2.1 with codecs
 ========================
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps. The only difference from the clean Python buildpack is that this one includes ffmpeg. A pre-built version is simply cloned from [dzello's repo](https://github.com/dzello/ffmpeg-heroku), which was built on Heroku.
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps. The only difference from the clean Python buildpack is that this one includes a static build of ffmpeg 2.1 with codecs. The static build is simply cloned from [this repo](https://github.com/integricho/ffmpeg2.1-static-with-codecs).
 
 It uses [virtualenv](http://www.virtualenv.org/) and [pip](http://www.pip-installer.org/).
 
@@ -14,9 +14,9 @@ Example usage:
     gunicorn.py.ini  Procfile  requirements.txt  wsgi.py
     $ git init
     Initialized empty Git repository in /path/to/app/.git/
-    $ heroku create --stack cedar --buildpack git://github.com/integricho/heroku-buildpack-python-ffmpeg.git
+    $ heroku create --stack cedar --buildpack git://github.com/integricho/heroku-buildpack-python-ffmpeg2.1-with-codecs.git
     Creating random-app-name-1234... done, stack is cedar
-    BUILDPACK_URL=git://github.com/integricho/heroku-buildpack-python-ffmpeg.git
+    BUILDPACK_URL=git://github.com/integricho/heroku-buildpack-python-ffmpeg2.1-with-codecs.git
     http://random-app-name-1234.herokuapp.com/ | git@heroku.com:random-app-name-1234.git
     Git remote heroku added
     $ git add .
@@ -106,7 +106,7 @@ Example usage:
 
 You can also add it to upcoming builds of an existing application:
 
-    $ heroku config:add BUILDPACK_URL=git://github.com/integricho/heroku-buildpack-python-ffmpeg.git
+    $ heroku config:add BUILDPACK_URL=git://github.com/integricho/heroku-buildpack-python-ffmpeg2.1-with-codecs.git
 
 The buildpack will detect your app as Python if it has the file `requirements.txt` in the root. It will detect your app as Python/Django if there is an additional `settings.py` in a project subdirectory.
 
