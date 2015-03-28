@@ -79,6 +79,8 @@ Example usage:
 
            Successfully installed gevent gunicorn greenlet
            Cleaning up...
+    -----> Discovering process types
+           Procfile declares types -> (none)
 
     -----> Discovering process types
            Procfile declares types -> web
@@ -113,9 +115,9 @@ You can also add it to upcoming builds of an existing application:
 
     $ heroku config:add BUILDPACK_URL=git://github.com/integricho/heroku-buildpack-python-ffmpeg2.1-with-codecs.git
 
-The buildpack will detect your app as Python if it has the file `requirements.txt` in the root. It will detect your app as Python/Django if there is an additional `settings.py` in a project subdirectory.
+The buildpack will detect your app as Python if it has the file `requirements.txt` in the root.
 
-It will use virtualenv and pip to install your dependencies, vendoring a copy of the Python runtime into your slug.  The `bin/`, `include/` and `lib/` directories will be cached between builds to allow for faster pip install time.
+It will use Pip to install your dependencies, vendoring a copy of the Python runtime into your slug.
 
 Hacking
 -------
@@ -123,3 +125,15 @@ Hacking
 To use this buildpack, fork it on Github.  Push up changes to your fork, then create a test app with `--buildpack <your-github-url>` and push to it.
 
 To change the vendored virtualenv, unpack the desired version to the `src/` folder, and update the virtualenv() function in `bin/compile` to prepend the virtualenv module directory to the path. The virtualenv release vendors its own versions of pip and setuptools.
+
+    $ cat runtime.txt
+    python-3.4.2
+
+Runtime options include:
+
+- python-2.7.8
+- python-3.4.2
+- pypy-2.4.0 (unsupported, experimental)
+- pypy3-2.4.0 (unsupported, experimental)
+
+Other [unsupported runtimes](https://github.com/heroku/heroku-buildpack-python/tree/master/builds/runtimes) are available as well.
